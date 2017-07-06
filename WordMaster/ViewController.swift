@@ -10,6 +10,12 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var labelHint: UILabel!
+    @IBOutlet weak var labelNumberOfGuesses: UILabel!
+    @IBOutlet weak var labelProgress: UILabel!
+    @IBOutlet weak var textInput: UITextField!
+    @IBOutlet weak var labelLetterGuessed: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -21,5 +27,7 @@ class ViewController: UIViewController {
     }
 
 
+    @IBAction func pressNewWordButton(_ sender: UIButton) {
+    }
 }
 
