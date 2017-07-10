@@ -25,7 +25,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     var randomNumber : Int?
     var lastRandomNumber : Int?
     var wordToGuess : [Character] = []
-    var wordToProgress : [Character] = []
+    var wordProgress : [Character] = []
     var score : Int = 5
     let maxScore : Int = 5
     var letterBank : String = "Letters guessed: "
@@ -58,19 +58,37 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func setRandomNumber(){
+        randomNumber = Int(arc4random_uniform(UInt32(wordList.count)))
+        if randomNumber == lastRandomNumber{
+            setRandomNumber()
+        }
         
+        lastRandomNumber = randomNumber
+        
+        setWordToGuessAndHint()
+        setWordProgress()
     }
     
     func setWordToGuessAndHint(){
-        
+        wordToGuess = wordList[randomNumber!]
+        labelHint.text = "Hint: " + hintList[randomNumber!]
     }
     
     func setWordProgress(){
-        
+        for _ in 0..<(wordToGuess.count / 2){
+            wordProgress.append("_")
+            wordProgress.append(" ")
+        }
+        labelProgress.text = String(wordProgress)
     }
     
     func guessLetter(letterGuess : Character){
-        
+        wordProgress = []
+        score = 5
+        letterBank.removeAll()
+        labelLetterGuessed.text = "Letter guessed: "
+        labelNumberOfGuesses.text = "5/5 guesses left"
+        setRandomNumber()
     }
     
     func revealLetter(_index : Int, _letter : Character){
